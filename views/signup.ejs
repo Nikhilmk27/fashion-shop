@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center">Sign Up</h3>
+            <form id="signupForm" action="/signup" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <!-- Address Fields -->
+              
+              <div class="address-fields">
+                <div class="form-group">
+                  <label for="addressName">Name</label>
+                  <input type="text" class="form-control" id="addressName" name="addressName" required>
+                </div>
+                <div class="form-group">
+                  <label for="addressEmail">Email</label>
+                  <input type="email" class="form-control" id="addressEmail" name="addressEmail" required>
+                </div>
+                <div class="form-group">
+                  <label for="addressMobile">Mobile</label>
+                  <input type="tel" class="form-control" id="addressMobile" name="addressMobile" required>
+                </div>
+                <div class="form-group">
+                  <label for="addressZipCode">Zip Code</label>
+                  <input type="number" class="form-control" id="addressZipCode" name="addressZipCode" required>
+                </div>
+                <div class="form-group">
+                  <label for="userAddress">Address</label>
+                  <textarea class="form-control" id="userAddress" name="userAddress" required></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
