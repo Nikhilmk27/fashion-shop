@@ -10,6 +10,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <section class="vh-75" style="background-color: #eee">
@@ -20,20 +21,26 @@
               <div class="card-body p-md-5">
                 <div class="row justify-content-center">
                   <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                    <span class="text-danger"><%= locals.message %></span>
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Sign up
                     </p>
 
-                    <form class="mx-1 mx-md-4" action="/signup"  method="post"  >
+                    <form class="mx-1 mx-md-4" action="/signup" method="post">
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input
                             type="text"
-                            id="form3Example1c"
+                            id="name"
                             class="form-control"
                             name="name"
                           />
+                          <span
+                            id="usererror"
+                            name="usererror"
+                            class="text-danger font-weight-bold"
+                          ></span>
                           <label class="form-label" for="form3Example1c"
                             >Your Name</label
                           >
@@ -45,10 +52,15 @@
                         <div class="form-outline flex-fill mb-0">
                           <input
                             type="email"
-                            id="form3Example3c"
+                            id="email"
                             class="form-control"
                             name="email"
                           />
+                          <span
+                            id="emailerror"
+                            name="emailerror"
+                            class="text-danger font-weight-bold"
+                          ></span>
                           <label class="form-label" for="form3Example3c"
                             >Your Email</label
                           >
@@ -60,10 +72,15 @@
                         <div class="form-outline flex-fill mb-0">
                           <input
                             type="password"
-                            id="form3Example4c"
+                            id="password"
                             class="form-control"
                             name="password"
                           />
+                          <span
+                            id="usererror"
+                            name="usererror"
+                            class="text-danger font-weight-bold"
+                          ></span>
                           <label class="form-label" for="form3Example4c"
                             >Password</label
                           >
@@ -112,11 +129,7 @@
                   <div
                     class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
                   >
-                  <img
-                      src="cam.jpg"
-                      class="img-fluid"
-                      alt="Sample image"
-                    />
+                    <img src="cam.jpg" class="img-fluid" alt="Sample image" />
                     <!-- <img
                       src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                       class="img-fluid"
@@ -130,6 +143,113 @@
         </div>
       </div>
     </section>
+
+    <!-- jquery form validation -->
+
+    <!-- <script> -->
+      // $(document).ready(function () {
+        let nameValid = false;
+        let emailValid = false;
+        let passwordValid = false;
+        $('#name').keyup(function(){
+          let name = $('#name').val()
+          if(name == ''){
+            $('#usererror').html("name canot be empty")
+          }else{
+            $('#usererror').html('')
+            nameValid = true
+          }
+          if (nameValid == true && emailValid == true && passValid == true) {
+            $("#signup").prop("disabled", false);
+          } else {
+            $("#signup").prop("disabled", true);
+          }
+        })
+        // email validation
+        $("#email").keyup(function () {
+          let email = $("#email").val();
+          let emailRegex =
+            /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm;
+          if (email == "") {
+            $("#emailerror").html("Email cannot be empty");
+          } else if (!emailRegex.test(email)) {
+            $("#emailerror").html("Invalid email");
+          } else {
+            $("#emailerror").html("");
+            emailValid = true;
+          }
+          if (nameValid == true && emailValid == true && passValid == true) {
+            $("#signup").prop("disabled", false);
+          } else {
+            $("#signup").prop("disabled", true);
+          }
+        });
+        // password verification
+        
+      });
+    <!-- </script> -->
+    <script>
+     
+
+
+  $(document).ready(function () {
+    let nameValid = false;
+    let emailValid = false;
+    let passValid = false; // Fixed variable name
+
+    $('#name').keyup(function () {
+      let name = $('#name').val();
+      if (name == '') {
+        $('#usererror').html('Name cannot be empty');
+      } else {
+        $('#usererror').html('');
+        nameValid = true;
+      }
+      updateButtonState();
+    });
+
+    // email validation
+    $("#email").keyup(function () {
+      let email = $("#email").val();
+      let emailRegex = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm;
+      if (email == "") {
+        $("#emailerror").html("Email cannot be empty");
+      } else if (!emailRegex.test(email)) {
+        $("#emailerror").html("Invalid email");
+      } else {
+        $("#emailerror").html("");
+        emailValid = true;
+      }
+      updateButtonState();
+    });
+
+    // password validation (assuming similar validation as other fields)
+    $("#password").keyup(function () {
+      let password = $("#password").val();
+      // Your password validation logic goes here...
+      // For example:
+      if (password.length < 8) {
+        $("#passworderror").html("Password must be at least 8 characters");
+      } else {
+        $("#passworderror").html("");
+        passValid = true;
+      }
+      updateButtonState();
+    });
+
+    // Function to update button state
+    function updateButtonState() {
+      if (nameValid && emailValid && passValid) {
+        $("#signup").prop("disabled", false);
+      } else {
+        $("#signup").prop("disabled", true);
+      }
+    }
+  });
+</script>
+
+
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
