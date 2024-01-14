@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controller/user/userController')
+// user routs
+router.get('/signin',userController.getLogin)
+router.post('/signin',userController.postSignin)
 router.get('/home',userController.getHome)
 router.get('/signup',userController.getSignup)
  router.post('/signup',userController.postSignup)

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express')
 const userRout = require('./routs/userRout')
+const adminRout = require('./routs/adminRout')
 const path = require('path')
 const session = require('express-session')
 const connnectDB = require('./model/dbModel')
@@ -21,6 +22,7 @@ app.use(session({
 }))
 
 app.use('/',userRout)
+app.use('/',adminRout)
 // for adding externel file to view engine(static files)
 const staticPath = path.join(__dirname,'public')
 app.use(express.static(staticPath))

@@ -4,8 +4,36 @@ const usercollection = require("../../model/userCollection");
 const nodemailer = require("nodemailer");
 const bcrypt = require('bcrypt')
 const getHome = (req, res) => {
-  res.render("../views/index.ejs");
+  res.render("../views/index.ejs",{name:"home"});
 };
+const getLogin = (req,res) => {
+  res.render('../views/login.ejs')
+}
+  const postSignin = async (req,res) => {
+    try{
+      const data = req.body
+      console.log(data)
+      const email = req.body.email
+      let userExist = await usercollection.findOne({email:email}) 
+      console.log(userExist)
+      if(userExist){
+        const match = await bcrypt.compare(req.body.password,userExist.password)
+        if(match){
+          res.render('../views/index.ejs',{name:userExist.name})
+        }
+      }else{
+        res.render('../views/login')
+      }
+
+    }catch(error){
+      console.log(error.message)
+
+    }
+    
+
+  }
+
+
 const getSignup = (req, res) => {
   res.render("../views/signupregister");
 };
@@ -68,7 +96,6 @@ const getSignup = (req, res) => {
 const postSignup = async (req, res) => {
   try {
     // const userDatas = req.body;
-
     // console.log(userDatas);
     req.session.userData = req.body;
     console.log("session data is bellow")
@@ -195,5 +222,7 @@ module.exports = {
   postSignup,
   otpPageView,
   otpVerification,
-  resend_otp
+  resend_otp,
+  getLogin,
+  postSignin
 };
