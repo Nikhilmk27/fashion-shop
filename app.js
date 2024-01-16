@@ -6,7 +6,7 @@ const path = require('path')
 const session = require('express-session')
 const connnectDB = require('./model/dbModel')
 const cookieparser = require('cookie-parser')
-// const session = require('express-session')
+
 const app = express()
 // connecting to database
 connnectDB()
@@ -25,7 +25,9 @@ app.use('/',userRout)
 app.use('/',adminRout)
 // for adding externel file to view engine(static files)
 const staticPath = path.join(__dirname,'public')
+// const staticCategory = path.join(__dirname,'public/admin/category')
 app.use(express.static(staticPath))
+// app.use(express.static(staticCategory))
 // set ejs view engine
 app.set('view engine', 'ejs')
 

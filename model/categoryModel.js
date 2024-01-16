@@ -4,12 +4,16 @@ const categorySchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    icon: {
+    image: {
         type: String,
+        required:true
     },
-    color: { 
-        type: String,
+    created:{
+        type : Date,
+        required : true,
+        default : Date.now
     }
+    
 })
 const Category = mongoose.model('Category',categorySchema)
 module.exports = Category
