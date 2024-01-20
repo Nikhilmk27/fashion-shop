@@ -17,7 +17,8 @@ const productSchema = mongoose.Schema({
       default: ''
   },
   images: [{
-      type: String
+      type: String,
+      default:''
   }],
   brand: {
       type: String,
@@ -49,6 +50,10 @@ const productSchema = mongoose.Schema({
   isFeatured: {
       type: Boolean,
       default: false,
+  },
+  flag:{
+
+    type:String
   },
   dateCreated: {
       type: Date,

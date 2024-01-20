@@ -50,10 +50,9 @@
 
             </li>
             <li>
-              <a class="nav-link" href="/products">products</a>
+              <a class="nav-link" href="#">products</a>
 
             </li>
-            
             
             <li class="nav-item dropdown">
               <a
@@ -108,78 +107,25 @@
     </nav>
     <!-- backgrond image -->
     <h1>welcome to category page</h1>
-    <h1>button</h1>
+    <!-- catogory form -->
    
-    <style>
-        /* Optional: Add some basic styling to make the link look like a button */
-        .button-link {
-            display: inline-block;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
 
-<!-- Button as a link -->
-<a href="get_addCategory" class="button-link">add category</a>
-
-
-
-    <a href="get_addCategory">add</a>
-   
-    
-<!-- table to  display the categor data -->
-<div class="container mt-5">
-  <h2>category  List</h2>
-  
-  <% if ( categories!= "") { %>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          
-          <th>Image</th>
-          <th>Name</th>
-          <th>Action</th>
-         
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Replace this part with data retrieved from the database -->
-        <% categories.forEach((category) => { %>
-          <tr>
-           
-            <td><img src="/admin/category/<%= category.image %>" alt="User Image" width="50" class="img-thumbnail"></td>
-            <td><%= category.name %></td>
-            
-            <td>
-              <a href="/delete_category/<%= category._id %>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</a>
-              <a href="/edit_category/<%= category._id %>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-            </td>
-          </tr>
-        <% }) %>
-        <!-- Add more rows for each user -->
-      </tbody>
-    </table>
-  <% } else{%>
-    <h1 class="text-center text-secondary mt-5">no data found in the db!</h1>
-  <%} %>
-</div>
-
-
-  
-    
-
-   
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    <div class="container mt-4">
+        <div class="card shadow col-md-6 mx-auto">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Add Category</h2>
+                <form action="/add_category" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="categoryName">Category Name:</label>
+                        <input type="text" class="form-control" id="categoryName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryImage">Category Image:</label>
+                        <input type="file" class="form-control-file" id="categoryImage" name="image"
+                            accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>

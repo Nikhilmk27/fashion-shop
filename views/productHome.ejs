@@ -1,0 +1,79 @@
+<%- include('./partials/adminHeader') %>
+<style>
+    .navbar{
+  background-color: rgb(172, 164, 164);
+}
+  </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Add Product</h2>
+    <form action="/add_product" method="post" enctype="multipart/form-data">
+        <!-- Product Name -->
+        <div class="form-group">
+            <label for="productName">Product Name:</label>
+            <input type="text" class="form-control" id="productName" name="name" required>
+        </div>
+
+        <!-- Product Description -->
+        <div class="form-group">
+            <label for="productDescription">Product Description:</label>
+            <textarea class="form-control" id="productDescription" name="description" required></textarea>
+        </div>
+
+        <!-- Rich Description -->
+        <div class="form-group">
+            <label for="richDescription">Rich Description:</label>
+            <textarea class="form-control" id="richDescription" name="richDescription"></textarea>
+        </div>
+
+        <!-- Product Image -->
+        <div class="form-group">
+            <label for="productImage">Product Image:</label>
+            <input type="file" class="form-control-file" id="productImage" name="image" accept="image/*" required>
+        </div>
+
+        <!-- Other Product Details (Brand, Price, etc.) -->
+
+        <!-- Category -->
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <!-- Assuming you have a dropdown for selecting categories -->
+            <select class="form-control" id="category" name="category" required>
+                <!-- Options for categories -->
+                <option value="categoryId1">Category 1</option>
+                <option value="categoryId2">Category 2</option>
+                <!-- Add more options based on your categories -->
+            </select>
+        </div>
+
+        <!-- Count in Stock -->
+        <div class="form-group">
+            <label for="countInStock">Count in Stock:</label>
+            <input type="number" class="form-control" id="countInStock" name="countInStock" required min="0" max="255">
+        </div>
+
+        <!-- Add more fields based on your schema -->
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and jQuery (for form validation) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+<%- include('./partials/adminFooter') %>

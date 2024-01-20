@@ -1,0 +1,88 @@
+<%- include('../partials/adminHeader') %>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<!-- DataTables JavaScript -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#productTable').DataTable();
+  });
+</script>
+
+<h1>listing the product the product home page</h1>
+
+   
+   
+    <style>
+        /* Optional: Add some basic styling to make the link look like a button */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Button as a link -->
+<a href="/add_product" class="button-link">add product</a>
+
+
+
+    
+   
+    
+<!-- table to  display the categor data -->
+<div class="container mt-5">
+  <h2>product list</h2>
+  
+  <% if ( products!= "") { %>
+    <table class="table table-striped" id="productTable">
+      <thead>
+        <tr>
+          
+          <th>Image</th>
+          <th>name</th>
+          <th>category</th>
+          <th>Action</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Replace this part with data retrieved from the database -->
+        <% products.forEach((product) => { %>
+          <tr>
+           
+            <td><img src="/admin/products/<%= product.image %>" alt="User Image" width="50" class="img-thumbnail"></td>
+            <td><%= product.name %></td>
+            <td><%= product.category %></td>
+            
+            <td>
+              <a href="/delete_product/<%= product._id %>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</a>
+              <a href="/edit_product/<%= product._id %>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+            </td>
+          </tr>
+        <% }) %>
+        <!-- Add more rows for each user -->
+      </tbody>
+    </table>
+  <% } else{%>
+    <h1 class="text-center text-secondary mt-5">no data found in the db!</h1>
+  <%} %>
+</div>
+
+
+<%- include('../partials/adminFooter') %>
+
+
+
+
