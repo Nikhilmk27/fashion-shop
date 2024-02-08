@@ -53,10 +53,10 @@
             <textarea
               class="form-control"
               id="productDescription"
-              value="<%= product.description %>"
+              value=""
               name="description"
               required
-            ></textarea>
+            ><%= product.description %></textarea>
           </div>
 
           <!-- Rich Description -->
@@ -66,8 +66,8 @@
               class="form-control"
               id="richDescription"
               name="richDescription"
-              value="<%=  product.richDescription%>"
-            ></textarea>
+              value=""
+            ><%=  product.richDescription%></textarea>
           </div>
 
           <!-- Product Image -->
@@ -101,8 +101,9 @@
             <!-- Assuming you have a dropdown for selecting categories -->
             <select class="form-control" id="category" name="category" required>
               <!-- Options for categories -->
-              <option value="65a6866a6db72fb862f54810">one</option>
-              <option value="categoryId2">Category 2</option>
+              <option value="65b0a527c5260bf6059ec4bb">shirts</option>
+                    <option value="65b0a545c5260bf6059ec4c1">trousers</option>
+                    <option value="65b0b9d6c5260bf6059ec4fc">t-shirts</option>
               <!-- Add more options based on your categories -->
             </select>
           </div>
@@ -117,8 +118,7 @@
               name="price"
               value="<%= product.price %>"
               required
-              min="0"
-              max="255"
+              
             />
           </div>
           <!-- Count in Stock -->
@@ -131,8 +131,7 @@
               name="brand"
               value="<%= product.brand %>"
               required
-              min="0"
-              max="255"
+              
             />
           </div>
           <!-- Count in Stock -->
@@ -144,6 +143,8 @@
               id="countInStock"
               name="rating"
               value="<%= product.rating %>"
+              min="0"
+              max="5"
             />
           </div>
           <!-- Count in Stock -->
@@ -177,6 +178,8 @@
               id="countInStock"
               name="countInStock"
               value="<%= product.countInStock %>"
+              min="0"
+              max="300"
             />
           </div>
 

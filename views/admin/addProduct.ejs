@@ -1,150 +1,184 @@
 <%- include('../partials/adminHeader') %>
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Product Form</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
     <style>
-        /* Custom styles for the shadow box and reduced width */
-        .custom-shadow-box {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 0 auto; /* Center the box horizontally */
-            max-width: 600px; /* Set the maximum width */
-            background-color: #fff; /* Set background color */
-            border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-            margin-top: 50px; /* Optional: Add margin-top for space from top */
-        }
+      /* Custom styles for the shadow box and reduced width */
+      .custom-shadow-box {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 0 auto; /* Center the box horizontally */
+        max-width: 600px; /* Set the maximum width */
+        background-color: #fff; /* Set background color */
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+        margin-top: 50px; /* Optional: Add margin-top for space from top */
+      }
     </style>
-</head>
-<body>
-
-<div class="container mt-5">
-    <div class="custom-shadow-box">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="custom-shadow-box">
         <h2 class="text-center">Add Product</h2>
         <form action="/add_product" method="post" enctype="multipart/form-data">
-            <!-- Your form content goes here -->
-            <!-- Product Name -->
-            <div class="form-group">
-                <label for="productName">Product Name:</label>
-                <input type="text" class="form-control" id="productName" name="name" required>
-            </div>
+          <!-- Your form content goes here -->
+          <!-- Product Name -->
+          <div class="form-group">
+            <label for="productName">Product Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              name="name"
+              required
+            />
+          </div>
 
-            <!-- Product Description -->
-            <div class="form-group">
-                <label for="productDescription">Product Description:</label>
-                <textarea class="form-control" id="productDescription" name="description" required></textarea>
-            </div>
+          <!-- Product Description -->
+          <div class="form-group">
+            <label for="productDescription">Product Description:</label>
+            <textarea
+              class="form-control"
+              id="productDescription"
+              name="description"
+              required
+            ></textarea>
+          </div>
 
-            <!-- Rich Description -->
-            <div class="form-group">
-                <label for="richDescription">Rich Description:</label>
-                <textarea class="form-control" id="richDescription" name="richDescription"></textarea>
-            </div>
+          <!-- Rich Description -->
+          <div class="form-group">
+            <label for="richDescription">Rich Description:</label>
+            <textarea
+              class="form-control"
+              id="richDescription"
+              name="richDescription"
+            ></textarea>
+          </div>
 
-            <!-- Product Image -->
-            <div class="form-group">
-                <label for="productImage">Product Image:</label>
-                <input type="file" class="form-control-file" id="productImage" name="image" accept="image/*" >
-            </div>
-            
+          <!-- Product Image -->
+          <div class="form-group">
+            <label for="productImage">Product Image:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="productImage"
+              name="image"
+              accept="image/*"
+            />
+          </div>
 
-            <!-- Other Product Details (Brand, Price, etc.) -->
+          <!-- Other Product Details (Brand, Price, etc.) -->
 
-            <!-- Category -->
-            <div class="form-group">
-                <label for="category">Category:</label>
-                <!-- Assuming you have a dropdown for selecting categories -->
-                <select class="form-control" id="category" name="category" required>
-                    <!-- Options for categories -->
-                    <option value="65a6866a6db72fb862f54810">one</option>
-                    <option value="categoryId2">Category 2</option>
-                    <!-- Add more options based on your categories -->
-                </select>
-            </div>
+          <!-- Category -->
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <!-- Assuming you have a dropdown for selecting categories -->
+            <select class="form-control" id="category" name="category" required>
+              <!-- Options for categories -->
+              <option value="65b0a527c5260bf6059ec4bb">shirts</option>
+              <option value="65b0a545c5260bf6059ec4c1">trousers</option>
+              <option value="65b0b9d6c5260bf6059ec4fc">t-shirts</option>
+              <!-- Add more options based on your categories -->
+            </select>
+          </div>
 
-            <!-- Count in Stock -->
-            <div class="form-group">
-                <label for="countInStock">price</label>
-                <input type="number" class="form-control" id="countInStock" name="price" required min="0" max="255">
-            </div>
-            <!-- Count in Stock -->
-            <div class="form-group">
-                <label for="countInStock">brand</label>
-                <input type="text" class="form-control" id="countInStock" name="brand" required min="0" max="255">
-            </div>
-            <!-- Count in Stock -->
-            <div class="form-group">
-                <label for="countInStock">rating</label>
-                <input type="number" class="form-control" id="countInStock" name="rating" required min="0" max="255">
-            </div>
-            <!-- Count in Stock -->
-            <div class="form-group">
-                <label for="countInStock">num reviews:</label>
-                <input type="number" class="form-control" id="countInStock" name="numReviews" required min="0" max="255">
-            </div>
-            <!-- Count in Stock -->
-            <div class="form-group">
-                <label for="countInStock">date created:</label>
-                <input type="date" class="form-control" id="countInStock" name="dateCreated" required min="0" max="255">
-            </div>
-            <!-- Count in Stock -->
-            <div class="form-group">
-                <label for="countInStock">Count in Stock:</label>
-                <input type="number" class="form-control" id="countInStock" name="countInStock" required min="0" max="255">
-            </div>
-            
-            
+          <!-- Count in Stock -->
+          <div class="form-group">
+            <label for="countInStock">price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="countInStock"
+              name="price"
+              required
+              
+            />
+          </div>
+          <!-- Count in Stock -->
+          <div class="form-group">
+            <label for="countInStock">brand</label>
+            <input
+              type="text"
+              class="form-control"
+              id="countInStock"
+              name="brand"
+              required
+              min="0"
+              max="300"
+            />
+          </div>
+          <!-- Count in Stock -->
+          <div class="form-group">
+            <label for="countInStock">rating</label>
+            <input
+              type="number"
+              class="form-control"
+              id="countInStock"
+              name="rating"
+              required
+              min="0"
+              max="5"
+            />
+          </div>
+          <!-- Count in Stock -->
+          <div class="form-group">
+            <label for="countInStock">num reviews:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="countInStock"
+              name="numReviews"
+              required
+              
+            />
+          </div>
+          <!-- Count in Stock -->
+          <div class="form-group">
+            <label for="countInStock">date created:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="countInStock"
+              name="dateCreated"
+              required
+              
+            />
+          </div>
+          <!-- Count in Stock -->
+          <div class="form-group">
+            <label for="countInStock">Count in Stock:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="countInStock"
+              name="countInStock"
+              required
+              
+            />
+          </div>
 
-            <!-- Add more fields based on your schema -->
+          <!-- Add more fields based on your schema -->
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-block">
+            Add Product
+          </button>
         </form>
+      </div>
     </div>
-</div>
 
-<!-- Bootstrap JS and jQuery (for form validation) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-</body>
+    <!-- Bootstrap JS and jQuery (for form validation) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
 </html>
-<div>
-    <h2>Login</h2>
-    <form action="/add_product" method="post">
-        <!-- Name Input -->
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
 
-        <!-- Password Input -->
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-
-        <!-- Submit Button -->
-        <button type="submit">Login</button>
-    </form>
-</div>
 <%- include('../partials/adminFooter') %>
-
-
-
-
-{
-    "_id": {
-      "$oid": "65a6866a6db72fb862f54810"
-    },
-    "name": "pants",
-    "image": "1705412202262.webp",
-    "created": {
-      "$date": "2024-01-16T13:36:42.264Z"
-    },
-    "__v": 0
-  }

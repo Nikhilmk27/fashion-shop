@@ -35,6 +35,7 @@ app.all('*',(req,res) =>{
     res.render('404')
 })
 
+
 const PORT = process.env.PORT || 7000
 app.listen(PORT,()=>{
     console.log(`app listining to port ${PORT}`)

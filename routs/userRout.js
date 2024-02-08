@@ -10,5 +10,8 @@ router.get('/signup',userController.getSignup)
  router.get('/otp',userController.otpPageView)
  router.post('/otpverification',userController.otpVerification)
  router.post('/resend_otp',userController.resend_otp)
+//  user category
+router.get('/getProductCategory/:id',userController.getProductCategory)
+router.get('/getProductView/:id',userController.getProductView)
 
 module.exports = router

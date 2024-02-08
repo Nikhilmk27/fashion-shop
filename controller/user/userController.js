@@ -1,10 +1,34 @@
 const User = require("../../model/user");
 const usercollection = require("../../model/userCollection");
+const products = require('../../model/productModel')
+const Category = require('../../model/categoryModel')
 // const userSign = require("../../model/userCollection");
 const nodemailer = require("nodemailer");
 const bcrypt = require('bcrypt')
-const getHome = (req, res) => {
-  res.render("../views/index.ejs",{name:"home"});
+const getHome = async (req, res) => {
+  try {
+    const product = await products.find()
+    console.log(product)
+    const category = await Category.find() 
+    console.log(category)
+    if(product && category){
+    res.render("../views/index.ejs",{name:"home",product,category})
+  }else{
+    res.status(500).send('error loadi data')
+  }
+
+  // if(product){
+  //   res.render("../views/index.ejs",{name:"home",product})
+  // }else{
+  //   res.status(500).send('error loadi data')
+  // }
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+  
+  
+  // res.render("../views/index.ejs",{name:"home"});
 };
 const getLogin = (req,res) => {
   res.render('../views/login.ejs')
@@ -215,6 +239,33 @@ const resend_otp = async (req,res) => {
       },300000)
 
 }
+// user category management
+const getProductCategory = async (req,res) => {
+  try {
+    const id = req.params.id
+  const product = await products.find({category:id})
+  console.log(product)
+  res.render('../views/categoryProduct.ejs',{product})
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+  
+  
+}
+const getProductView = async (req,res) => {
+  try {
+    const id = req.params.id
+    const product = await products.findOne({_id : id})
+    console.log("single product")
+    console.log(product)
+    res.render('../views/user/productPage.ejs',{product})
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+  
+}
 module.exports = {
   getHome,
   getSignup,
@@ -224,5 +275,7 @@ module.exports = {
   otpVerification,
   resend_otp,
   getLogin,
-  postSignin
+  postSignin,
+  getProductCategory,
+  getProductView
 };
