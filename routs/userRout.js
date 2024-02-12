@@ -13,5 +13,11 @@ router.get('/signup',userController.getSignup)
 //  user category
 router.get('/getProductCategory/:id',userController.getProductCategory)
 router.get('/getProductView/:id',userController.getProductView)
-
+// user cart
+router.post('/addToCart/:productId',userController.postAddToCat)
+router.get('/addToCart',userController.getAddToCart)
+router.get('/cart/count',userController.getCartCount)
+router.post('/updateQuantity/:productId',userController.updateQuantity)
+router.post('/removeProduct/:productId',userController.removeProduct)
+router.get('/checkout',userController.checkOut)
 module.exports = router

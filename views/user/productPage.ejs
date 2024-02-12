@@ -177,7 +177,10 @@
               </div>
             </div>
 
-            <button class="btn btn-primary btn-sm custom-button">Add to Cart</button>
+            <form action="/addToCart/<%= product._id %>" method="post">
+              <button type="submit" class="btn btn-primary btn-sm custom-button">Add to Cart</button>
+          </form>
+            
           </div>
         </div>
       </div>

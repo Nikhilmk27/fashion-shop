@@ -80,13 +80,23 @@
             </button>
           </form>
           <!-- cart icon -->
+
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <!-- Cart icon -->
+<li class="nav-item">
+  <a class="nav-link" href="/addToCart">
+      <i class="fas fa-shopping-cart"></i>
+      <!-- Cart icon -->
+      <span id="cartItemCount" class="badge bg-secondary"></span> <!-- Display cart count here -->
+  </a>
+</li>
+
+            <!-- <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fas fa-shopping-cart"></i>
-                <!-- Cart icon -->
+             
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fas fa-heart"></i>
@@ -258,5 +268,33 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+
+    <!-- cart ico number indication -->
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Fetch cart count when the page loads
+        fetchCartCount();
+
+        // Function to fetch cart count
+        function fetchCartCount() {
+            $.ajax({
+                url: '/cart/count', // Your API endpoint to get cart count
+                method: 'GET',
+                success: function(response) {
+                    // Update the cart count in the navbar
+                    $('#cartItemCount').text(response.count);
+                },
+                error: function(err) {
+                    console.error('Error fetching cart count:', err);
+                }
+            });
+        }
+    });
+</script>
+
+    <!-- cart ico number indication -->
   </body>
 </html>

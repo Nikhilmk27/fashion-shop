@@ -2,6 +2,7 @@ const User = require("../../model/user");
 const usercollection = require("../../model/userCollection");
 const products = require('../../model/productModel')
 const Category = require('../../model/categoryModel')
+const Cart = require('../../model/cart')
 // const userSign = require("../../model/userCollection");
 const nodemailer = require("nodemailer");
 const bcrypt = require('bcrypt')
@@ -31,7 +32,12 @@ const getHome = async (req, res) => {
   // res.render("../views/index.ejs",{name:"home"});
 };
 const getLogin = (req,res) => {
-  res.render('../views/login.ejs')
+  // res.render('../views/login.ejs')
+  if(req.session.user){
+    res.redirect('/home')
+  }else{
+  res.render('../views/user/login.ejs')
+}
 }
   const postSignin = async (req,res) => {
     try{
@@ -41,9 +47,11 @@ const getLogin = (req,res) => {
       let userExist = await usercollection.findOne({email:email}) 
       console.log(userExist)
       if(userExist){
+        req.session.user = userExist
         const match = await bcrypt.compare(req.body.password,userExist.password)
         if(match){
-          res.render('../views/index.ejs',{name:userExist.name})
+
+          res.redirect('/home')
         }
       }else{
         res.render('../views/login')
@@ -196,7 +204,7 @@ const otpVerification = async (req,res) => {
         password: passwordHash,
     })
     console.log(user)
-    res.redirect('/login?msg=successfully registerd plese login')
+    res.redirect('/signin?msg=successfully registerd plese login')
   }
 } catch(error){
   console.log(error.message)
@@ -266,6 +274,236 @@ const getProductView = async (req,res) => {
   }
   
 }
+// const postAddToCat =async (req,res) => {
+//   // Cart route to add an item to the cart
+
+//   // Check if the user is logged in
+//   if (!req.session || !req.session.user) {
+//       return res.status(401).send('Unauthorized');
+//   }
+
+//   const userId = req.session.user._id; // Assuming user ID is stored in session
+//   const productId = req.params.productId;
+
+//   try {
+//       let cart = await Cart.findOne({ userId });
+//       if (!cart) {
+//           cart = new Cart({ userId, items: [] });
+//       }
+
+//       // Check if the product already exists in the cart
+//       const existingItemIndex = cart.items.findIndex(item => item.productId === productId);
+//       if (existingItemIndex !== -1) {
+//           // If the product exists, update the quantity
+//           cart.items[existingItemIndex].quantity++;
+//       } else {
+//           // If the product doesn't exist, add it to the cart
+//           cart.items.push({ productId, quantity: 1 });
+//       }
+
+//       await cart.save();
+//       // res.sendStatus(200); // Send success status
+//       res.redirect('/home');
+//   } catch (error) {
+//       console.error(error);
+//       res.sendStatus(500); // Internal server error
+//   }
+// }
+// Route to get the user's cart
+// const getAddToCart = async (req, res) => {
+//     // Check if the user is logged in
+//     if (!req.session || !req.session.user) {
+//         return res.status(401).send('Unauthorized');
+//     }
+
+//     const userId = req.session.user._id; // Assuming user ID is stored in session
+//     console.log(req.session.user)
+
+//     try {
+//         const cart = await Cart.findOne({ userId }).populate('items.productId');
+//         res.json(cart);
+//     } catch (error) {
+//         console.error(error);
+//         res.sendStatus(500); // Internal server error
+//     }
+// }
+
+// rout to render the cart view
+// Route to get cart details
+const getAddToCart =  async (req, res) => {
+  // Check if the user is logged in
+  if (!req.session || !req.session.user) {
+      return res.status(401).send('Unauthorized');
+  }
+
+  const userId = req.session.user._id;
+
+  try {
+      const cart = await Cart.findOne({ userId }).populate('items.productId');
+      if (!cart) {
+          return res.render('../views/user/cart', { cartItems: [] });
+      }
+
+      res.render('../views/user/cart', { cartItems: cart.items });
+  } catch (error) {
+      console.error('Error fetching cart details:', error);
+      res.sendStatus(500); // Internal server error
+  }
+}
+
+const  postAddToCat = async (req, res) => {
+    // Cart route to add an item to the cart
+
+    // Check if the user is logged in
+    if (!req.session || !req.session.user) {
+        return res.status(401).send('Unauthorized');
+    }
+
+    const userId = req.session.user._id; // Assuming user ID is stored in session
+    const productId = req.params.productId;
+
+    try {
+        let cart = await Cart.findOne({ userId });
+
+        if (!cart) {
+            cart = new Cart({ userId, items: [] });
+        }
+
+        // Check if the product already exists in the cart
+        const existingItem = cart.items.find(item => item.productId.toString() === productId);
+
+        if (existingItem) {
+            // If the product exists, update the quantity
+            existingItem.quantity++;
+        } else {
+            // If the product doesn't exist, add it to the cart
+            cart.items.push({ productId, quantity: 1 });
+        }
+
+        await cart.save();
+        res.redirect('/home');
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500); // Internal server error
+    }
+}
+
+
+// controller to fetch cart count
+// Route to get cart count
+const getCartCount = async (req, res) => {
+  // Check if the user is logged in
+  if (!req.session || !req.session.user) {
+      return res.status(401).json({ count: 0 }); // Unauthorized
+  }
+
+  const userId = req.session.user._id;
+
+  try {
+      const cart = await Cart.findOne({ userId });
+      if (!cart) {
+          return res.json({ count: 0 });
+      }
+
+      const itemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+      res.json({ count: itemCount });
+  } catch (error) {
+      console.error('Error fetching cart count:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+// update quantit rout
+
+
+
+
+// Define the POST route for updating quantity
+const updateQuantity = async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session || !req.session.user) {
+        return res.status(401).send('Unauthorized');
+    }
+
+    const userId = req.session.user._id;
+    const productId = req.params.productId;
+    const action = req.query.action; // 'inc' for increment, 'dec' for decrement
+    console.log(userId)
+    console.log(productId)
+    console.log(action)
+
+    try {
+        let cart = await Cart.findOne({ userId });
+
+        if (!cart) {
+            return res.status(404).send('Cart not found');
+        }
+
+        // Find the item in the cart
+        const item = cart.items.find(item => item.productId.toString() === productId);
+
+        if (!item) {
+            return res.status(404).send('Product not found in cart');
+        }
+
+        // Update quantity based on the action
+        if (action === 'inc') {
+            item.quantity++;
+        } else if (action === 'dec') {
+            if (item.quantity > 1) {
+                item.quantity--;
+            } else {
+                return res.status(400).send('Quantity cannot be less than 1');
+            }
+        } else {
+            return res.status(400).send('Invalid action');
+        }
+
+        await cart.save();
+        res.sendStatus(200); // Send success status
+    } catch (error) {
+        console.error('Error updating quantity:', error);
+        res.sendStatus(500); // Internal server error
+    }
+}
+
+// rout to remove product from cart
+const removeProduct = async (req,res) =>{
+  // Check if the user is logged in
+  if (!req.session || !req.session.user) {
+      return res.status(401).send('Unauthorized');
+  }
+
+  const userId = req.session.user._id;
+  const productId = req.params.productId;
+
+  try {
+      let cart = await Cart.findOne({ userId });
+
+      if (!cart) {
+          return res.status(404).send('Cart not found');
+      }
+
+      // Filter out the item to be removed from the cart
+      cart.items = cart.items.filter(item => item.productId.toString() !== productId);
+
+      await cart.save();
+      res.sendStatus(200); // Send success status
+  } catch (error) {
+      console.error('Error removing product:', error);
+      res.sendStatus(500); // Internal server error
+  }
+}
+
+// rou to get the checkout page
+const checkOut = (req,res) => {
+  res.render('../views/user/checkout')
+}
+
+
+
+
+
 module.exports = {
   getHome,
   getSignup,
@@ -277,5 +515,12 @@ module.exports = {
   getLogin,
   postSignin,
   getProductCategory,
-  getProductView
+  getProductView,
+  postAddToCat,
+  getAddToCart,
+  getCartCount,
+  updateQuantity,
+  removeProduct,
+  checkOut
+  
 };

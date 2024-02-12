@@ -1,0 +1,200 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">mensFashion</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signup">Signup</a>
+              </li>
+              
+             
+  
+              <li>
+                <a class="nav-link" href="/signin">Signin</a>
+  
+              </li>
+              
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+            <!-- cart icon -->
+  
+            <ul class="navbar-nav ml-auto">
+              <!-- Cart icon -->
+  <li class="nav-item">
+    <a class="nav-link" href="/addToCart">
+        <i class="fas fa-shopping-cart"></i>
+        <!-- Cart icon -->
+        <span id="cartItemCount" class="badge bg-secondary"></span> <!-- Display cart count here -->
+    </a>
+  </li>
+  
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fas fa-shopping-cart"></i>
+               
+                </a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fas fa-heart"></i>
+                  <!-- Wishlist icon -->
+                </a>
+              </li>
+              
+            </ul>
+            <!--  -->
+          </div>
+        </div>
+      </nav>
+  
+    <div class="container">
+        <h1>Cart</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">image</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+           
+            <tbody>
+                <% let totalPrice = 0; %>
+                
+                <% cartItems.forEach(item => { %>
+                    
+                    <tr>
+                        <td><%= item.productId.name %></td>
+                        <td><img src="/admin/products/<%= item.productId.image %>" alt="" style="width: 50px; height: 50px;"></td>
+
+                        <td>
+                            
+                            <button class="btn btn-sm btn-secondary" onclick="updateQuantity('<%= item.productId._id.toString() %>','dec')">-</button>
+                       
+                            <%= item.quantity %>
+                            <!-- Increment button -->
+                            
+                            <button class="btn btn-sm btn-primary" onclick="updateQuantity('<%= item.productId._id.toString() %>','inc')">+</button>
+                        </td>
+                        
+                        
+                        <td>$<%=  item.quantity * item.productId.price; %></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="removeProduct('<%= item.productId._id.toString() %>')">Remove</button>
+                        </td>
+                    </tr>
+                    <% totalPrice += item.quantity * item.productId.price; %>
+                <% }); %>
+                <!-- <tr>
+                    <td colspan="4" class="text-end">Total Price: $<%= totalPrice %></td>
+                </tr> -->
+                <td>Total Price: </td>
+                <td></td>
+                <td></td>
+              <td class="text-start">$<%= totalPrice %></td>
+              <td></td>
+
+            </tbody>
+
+        </table>
+    </div>
+    <div class="container d-flex justify-content-center">
+      <a href=""><button>checkout</button></a>
+    </div>
+    
+    <script>
+        function updateQuantity(productId, action) {
+    // Send AJAX request to update quantity in the cart
+    const url = '/updateQuantity/' + productId + '?action=' + action;
+
+    fetch(url, { method: 'POST' })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update quantity');
+            }
+            // Reload the page to refresh the cart view
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error updating quantity:', error);
+        });
+}
+// function to fetch remve or deete product from cart api
+function removeProduct(productId) {
+            // Send AJAX request to remove product from the cart
+            const url = '/removeProduct/' + productId;
+
+            fetch(url, { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to remove product');
+                    }
+                    // Reload the page to refresh the cart view
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error removing product:', error);
+                });
+        }
+
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
+
