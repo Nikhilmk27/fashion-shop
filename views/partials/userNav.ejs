@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-md">
+    <div class="container-fluid">
+      <a class="navbar-brand " href="/home">MENS FASHION</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+          
+          <% if (!name) { %> <!-- Check if user is not authenticated -->
+            <li class="nav-item">
+              <a class="nav-link" href="/signin">Sign In</a>
+            </li>
+          <% } %>
+          <% if (name) { %> <!-- Check if user is not authenticated -->
+            <li class="nav-item">
+              <a class="nav-link" href="/signout">Sign Out</a>
+            </li>
+          <% } %>
+
+          <!-- <li>
+            <a class="nav-link" href="/signin">Signin</a>
+
+          </li> -->
+          
+
+        </ul>
+        <!-- search bar form -->
+        <form class="d-flex" role="search" id="searchForm">
+          <input
+          id="searchInput"
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit" id="searchBtn">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+        
+         
+        
+        <!-- cart icon -->
+
+        <ul class="navbar-nav ml-auto">
+          <!-- Cart icon -->
+<li class="nav-item">
+<a class="nav-link" href="/addToCart">
+    <i class="fas fa-shopping-cart"></i>
+    <!-- Cart icon -->
+    <span id="cartItemCount" class="badge bg-secondary"></span> <!-- Display cart count here -->
+</a>
+</li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-heart"></i>
+              <!-- Wishlist icon -->
+            </a>
+          </li>
+          <li>
+            <!-- Your home page content -->
+<% if (name) { %>
+  <p style="color: rgb(233, 85, 11); margin-top:3px; font-size: 20px; font-weight: bold;"> <%= name %></p>
+<% } else { %>
+  <p></p>
+<% } %>
+
+          </li>
+          
+        </ul>
+        <!--  -->
+      </div>
+    </div>
+  </nav>

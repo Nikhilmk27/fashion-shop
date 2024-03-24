@@ -1,191 +1,84 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mensFashion</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="navstyle.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-  </head>
+<%- include('partials/userHomeHeader.ejs') %>
   <body>
     <!-- home page navbar -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">mensFashion</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/signup">Signup</a>
-            </li>
-            
-           
+    <%- include('partials/userNav.ejs') %>
 
-            <li>
-              <a class="nav-link" href="/signin">Signin</a>
+    <!-- section to disply the search result and message -->
+<div id="searchResults" class="container mt-4" style="display: none;">
+  <!-- Search results will be dynamically added here -->
+</div>
+<!-- Search message div -->
+<div id="searchMessage" class="container mt-4 alert alert-info" style="display: none;">
+  No products available.
+</div>
+<!-- end section to disply the search result and message -->
 
-            </li>
-            
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-          <!-- cart icon -->
 
-          <ul class="navbar-nav ml-auto">
-            <!-- Cart icon -->
-<li class="nav-item">
-  <a class="nav-link" href="/addToCart">
-      <i class="fas fa-shopping-cart"></i>
-      <!-- Cart icon -->
-      <span id="cartItemCount" class="badge bg-secondary"></span> <!-- Display cart count here -->
-  </a>
-</li>
 
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-shopping-cart"></i>
-             
-              </a>
-            </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-heart"></i>
-                <!-- Wishlist icon -->
-              </a>
-            </li>
-            <li>
-              <% if (name) { %>
-                <li class="text-danger"><%= name %></li>
-              <% } else { %>
-                <li></li>
-              <% } %>
-            </li>
-          </ul>
-          <!--  -->
-        </div>
-      </div>
-    </nav>
-    <!-- backgrond image -->
-    <div class="homebg"></div>
-    <!-- iimage slider -->
-    <div
-      id="carouselExampleControls"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
+
+   
+
+    <!-- Image Slider with Text  -->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
+        <!-- Carousel Item 1 -->
         <div class="carousel-item active">
-          <img src="tshirt.jpg" class="d-block w-100" alt="..."  />
+          <img src="tshirt.jpg" class="d-block w-100" alt="T-Shirt" />
+          <!-- Caption for large screens and above -->
+          <div class="carousel-caption d-none d-md-block text-start">
+            <h5>Elevate Your Style Game: Unleash Your Confidence!</h5>
+            <p>Welcome to <span class="brandlogo">MENS FASHION</span></p>
+          </div>
+          <!-- Caption for small screens -->
+          <div class="carousel-caption d-block d-md-none text-start">
+            <h5>Welcome to <span class="brandlogo">MENS FASHION</span></h5>
+          </div>
         </div>
+        <!-- Carousel Item 2 -->
         <div class="carousel-item">
-          <img src="hp.jpg" class="d-block w-100" alt="..."  />
+          <img src="hp.jpg" class="d-block w-100" alt="HP" />
+          <!-- Caption for large screens and above -->
+          <div class="carousel-caption d-none d-md-block text-start">
+            <h5>Elevate Your Style Game: Unleash Your Confidence!</h5>
+            <p>Welcome to <span class="brandlogo">MENS FASHION</span></p>
+          </div>
+          <!-- Caption for small screens -->
+          <div class="carousel-caption d-block d-md-none text-start">
+            <h5>Welcome to <span class="brandlogo">MENS FASHION</span></h5>
+          </div>
         </div>
+        <!-- Carousel Item 3 -->
         <div class="carousel-item">
-          <img src="friends.jpg" class="d-block w-100" alt="..." />
+          <img src="friends.jpg" class="d-block w-100" alt="Friends" />
+          <!-- Caption for large screens and above -->
+          <div class="carousel-caption d-none d-md-block text-start">
+            <h5>Elevate Your Style Game: Unleash Your Confidence!</h5>
+            <p>Welcome to <span class="brandlogo">MENS FASHION</span></p>
+          </div>
+          <!-- Caption for small screens -->
+          <div class="carousel-caption d-block d-md-none text-start">
+            <h5>Welcome to <span class="brandlogo">MENS FASHION</span></h5>
+          </div>
         </div>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev"
-      >
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="next"
-      >
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <!-- iimage slider -->
-   
+    
+<!-- End Image Slider with Text at Middle Left -->
 
-<!-- categories  -->
-
-  <style>
-    /* Add your custom styles here */
-    body {
-      background-color: #f8f9fa;
-    }
-
-    .product-card {
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .product-card:hover {
-      transform: scale(1.05);
-    }
-  </style>
+  
 
 
 
-<!-- Navbar -->
-
-
-
-
-<!-- category -->
-
-
-
-
-
+<!-- categories -->
 
 <div class="container mt-4">
   <h2 class="text-center mb-4">Categories</h2>
@@ -210,49 +103,26 @@
 
 
 
-<!-- categories  -->
+<!-- end categories   -->
 
 
 
     <!-- products -->
     
-
-    <!-- <div class="container mt-4">
-      <h2 class="text-center mb-4">Featured Products</h2>
-        <div class="row">
-          <% product.forEach(product => { %>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="/admin/products/<%= product.image %>" class="card-img-top" alt="Shirts">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= product.name %></h5>
-                        <p class="card-text"><%= product.description %></p>
-                        <a href="/shirts" class="btn btn-primary">Shop</a>
-                    </div>
-                </div>
-            </div>
-            <% }); %>
-
-           
-
-            
-        </div>
-    </div> -->
     <div class="container mt-4">
       <h2 class="text-center mb-4">Featured Products</h2>
       <div class="row">
           <% product.forEach(product => { %>
           <!-- Product Card -->
-          <div class="col-md-4 mb-4">
+      <div class="col-md-4 mb-4">
               <div class="card">
                   <a href="/getProductView/<%= product.id %>"> <!-- Wrap image inside anchor tag -->
                       <img src="/admin/products/<%= product.image %>" class="card-img-top" alt="Product Image">
-                  </a>
+                  </a>    
                   <div class="card-body">
                       <h5 class="card-title"><%= product.name %></h5>
                       <p class="card-text"><%= product.description %></p>
-                      <a href="/products/<%= product.id %>" class="btn btn-primary">View Product</a> <!-- Link to product view page -->
+                      <a href="/getProductView/<%= product.id %>" class="btn btn-primary">View Product</a> <!-- Link to product view page -->
                   </div>
               </div>
           </div>
@@ -262,39 +132,55 @@
   
 
    
-    <!-- categories -->
+    <!-- end products -->
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h4>Contact Us</h4>
+          <p>mensfashionshoptrendz@gmail.com</p>
+          <p>Phone: +91 9072476291</p>
+          <p>Address: pigeon compelex,#125 ,nadapuram, calicut, india</p>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a class="aboutus" href="/">Home</a></li>
+            <li><a  class="aboutus" href="/products">Products</a></li>
+            <li><a  class="aboutus" href="/about">About Us</a></li>
+            <li><a  class="aboutus" href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Follow Us</h4>
+          <ul class="social-icons">
+            <li><a href="#"><i class="fab fa-facebook" style="font-size: 24px;"></i></a></li>
+            <li><a href="#"><i class="fab fa-youtube" style="color: red; font-size: 24px;"></i></a></li>
+
+            <li><a href="#"><i class="fab fa-instagram" style="color: #E4405F; font-size: 24px;"></i></a></li>
+
+          </ul>
+        </div>
+      </div>
+    </footer>
+    
+   
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
 
-    <!-- cart ico number indication -->
+
     <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/user/indexjq.js"></script>
 
-<script>
-    $(document).ready(function() {
-        // Fetch cart count when the page loads
-        fetchCartCount();
 
-        // Function to fetch cart count
-        function fetchCartCount() {
-            $.ajax({
-                url: '/cart/count', // Your API endpoint to get cart count
-                method: 'GET',
-                success: function(response) {
-                    // Update the cart count in the navbar
-                    $('#cartItemCount').text(response.count);
-                },
-                error: function(err) {
-                    console.error('Error fetching cart count:', err);
-                }
-            });
-        }
-    });
-</script>
-
-    <!-- cart ico number indication -->
   </body>
 </html>
+
+
+
+
+

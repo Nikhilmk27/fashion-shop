@@ -1,0 +1,57 @@
+
+
+
+<!-- razor pay -->
+<!-- payment.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+</head>
+<body>
+  <!-- Your payment page content -->
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    var razorpayOptions = {
+      key: 'rzp_test_b8r9QYFtn70jSl',
+      amount: '<%= razorpayOrder.amount %>',
+      currency: '<%= razorpayOrder.currency %>',
+      name: 'Mens Fashion',
+      description: 'Payment for Order #<%= placedOrder._id %>',
+      image: 'https://yourstore.com/logo.png',
+      order_id: '<%= razorpayOrder.id %>',
+      handler: function(response) {
+        // Handle success callback
+        console.log('Payment successful:', response);
+        console.log('payment sucess')
+        // Redirect or show success message
+      },
+      
+      prefill: {
+        name: '<%= placedOrder.firstName %> <%= placedOrder.lastName %>',
+        email: '<%= placedOrder.email %>',
+        contact: '<%= placedOrder.phone %>'
+      },
+      notes: {
+        address: '<%= placedOrder.address %>, <%= placedOrder.city %>, <%= placedOrder.state %>, <%= placedOrder.pincode %>'
+      },
+      theme: {
+        color: '#F37254'
+      }
+    };
+    var rzp = new Razorpay(razorpayOptions);
+    rzp.on('payment.failed', function(response) {
+      // Handle failure callback
+      console.log('Payment failed:', response.error.description);
+      // Show error message to the user
+      console.log('payment failed')
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      rzp.open();
+    });
+  </script>
+</body>
+</html>

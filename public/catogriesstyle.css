@@ -1,0 +1,13 @@
+/* Add your custom styles here */
+    body {
+      background-color: #f8f9fa;
+      
+    }
+
+    .product-card {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+    }

@@ -1,0 +1,214 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100,200,300,400,500,600,700,800,900&display=swap');
+
+
+.navbar {
+background-color: white;
+font-family: "Lexend Mega", sans-serif;
+position: sticky;
+top: 0;
+z-index: 1000; /* Adjust the z-index value as needed */
+}
+@media (max-width: 767px) {
+.navbar {
+  position: relative;
+  width: 100%;
+}
+}
+.nav-link {
+color: rgb(57, 57, 240) !important; /* Default link color */
+}
+
+
+
+.nav-link:hover {
+color: green !important; /* Color for hovered link */
+}
+.navbar-brand{
+color: rgb(13, 8, 166);
+font-weight: 700;
+}
+/* Default styles for carousel captions */
+.carousel-caption {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+color: #fff;
+padding: 20px;
+}
+
+.carousel-caption h5 {
+font-size: 2rem;
+}
+
+.carousel-caption p {
+font-size: 1.5rem;
+}
+
+/* Brand logo style */
+.brandlogo {
+color: rgb(13, 8, 166);
+font-weight: 700;
+}
+
+/* Media query for smaller screens (up to 767px) */
+@media (max-width: 767px) {
+.carousel-caption {
+padding: 10px; /* Adjust padding for smaller screens */
+}
+
+.carousel-caption h5 {
+font-size: 1.2rem; /* Adjust font size for smaller screens */
+}
+
+.carousel-caption p {
+font-size: 1.2rem; /* Adjust font size for smaller screens */
+}
+
+.carousel-caption button {
+display: block; /* Ensure the button is displayed as a block element */
+margin-top: 10px; /* Add some top margin for spacing */
+}
+}
+
+
+
+/* serch bar style */
+#searchForm{
+background-color: rgb(248, 240, 240);
+margin: 5px;
+}
+#searchInput{
+width: 250px;
+border: none;
+background-color: beige;
+}
+#searchBtn{
+border: none;
+
+}
+/* footer */
+
+/* .footer {
+background-color: rgb(225, 233, 227);
+padding: 30px 0;
+}
+
+.footer-container {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.footer-column {
+flex: 1;
+margin-right: 30px;
+}
+
+.footer-column:last-child {
+margin-right: 0;
+}
+
+.footer-column h4 {
+margin-bottom: 10px;
+color: #1a2059;
+}
+
+.footer-column ul {
+list-style: none;
+padding: 0;
+}
+
+.footer-column ul li {
+margin-bottom: 5px;
+}
+
+.social-icons {
+display: flex;
+gap: 20px;
+}
+
+.social-icons li {
+list-style: none;
+padding: 20px;
+} */
+/* Base styles for footer */
+.footer {
+background-color: rgb(225, 233, 227);
+padding: 30px 0;
+}
+
+.footer-container {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.footer-column {
+flex: 1;
+margin-right: 30px;
+}
+
+.footer-column:last-child {
+margin-right: 0;
+}
+
+.footer-column h4 {
+margin-bottom: 10px;
+color: #1a2059;
+}
+
+.footer-column ul {
+list-style: none;
+padding: 0;
+}
+
+.footer-column ul li {
+margin-bottom: 5px;
+}
+
+.social-icons {
+display: flex;
+gap: 20px;
+}
+
+.social-icons li {
+list-style: none;
+padding: 20px;
+}
+.aboutus{
+text-decoration: none;
+color: blue;
+}
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+.footer-container {
+flex-wrap: wrap;
+}
+
+.footer-column {
+flex: 1 1 100%;
+margin-right: 0;
+margin-left: 100px;
+margin-bottom: 20px;
+}
+
+.social-icons {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+
+gap: 10px;
+}
+
+.social-icons li {
+padding: 10px;
+}
+}
+

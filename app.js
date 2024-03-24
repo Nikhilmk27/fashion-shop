@@ -6,13 +6,16 @@ const path = require('path')
 const session = require('express-session')
 const connnectDB = require('./model/dbModel')
 const cookieparser = require('cookie-parser')
+const cors = require('cors')
 
 const app = express()
 // connecting to database
 connnectDB()
 // for parsing the url to json,string or array format
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 app.use(cookieparser())
+app.use(cors());
 // session middleweare
 app.use(session({
     resave: false,
