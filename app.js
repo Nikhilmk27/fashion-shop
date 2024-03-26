@@ -7,7 +7,7 @@ const session = require('express-session')
 const connnectDB = require('./model/dbModel')
 const cookieparser = require('cookie-parser')
 const cors = require('cors')
-
+const errorHandler = require("./middleweare/errorHandler")
 const app = express()
 // connecting to database
 connnectDB()
@@ -21,7 +21,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     /// secret: process.env.SESSION_SECRET,
-    secret: 'your_secret_key_here'
+    secret: 'your_secret_key_here',
+    cookie: { maxAge: 3600000 }
 }))
 
 app.use('/',userRout)
@@ -33,10 +34,12 @@ app.use(express.static(staticPath))
 // app.use(express.static(staticCategory))
 // set ejs view engine
 app.set('view engine', 'ejs')
+app.use(errorHandler)
 
 app.all('*',(req,res) =>{
     res.render('404')
 })
+
 
 
 const PORT = process.env.PORT || 7000
