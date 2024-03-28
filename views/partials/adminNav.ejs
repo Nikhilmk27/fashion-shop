@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mensFashion</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100,200,300,400,500,600,700,800,900&display=swap');
+
+
+.navbar {
+    background-color: rgb(193, 194, 208);
+    font-family: "Lexend Mega", sans-serif;
+    position: sticky;
+  top: 0;
+  z-index: 1000; /* Adjust the z-index value as needed */
+}
+@media (max-width: 767px) {
+    .navbar {
+        position: relative;
+        width: 100%;
+    }
+}
+.nav-link {
+    color: rgb(57, 57, 240) !important; /* Default link color */
+  }
+  
+  
+  
+  .nav-link:hover {
+    color: green !important; /* Color for hovered link */
+  }
+  .navbar-brand{
+    color: rgb(13, 8, 166);
+    font-weight: 700;
+  }
+  /* Default styles for carousel captions */
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .carousel-caption h5 {
+    font-size: 2rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 1.5rem;
+  }
+  
+  /* Brand logo style */
+  .brandlogo {
+    color: rgb(13, 8, 166);
+    font-weight: 700;
+  }
+  
+  /* Media query for smaller screens (up to 767px) */
+  @media (max-width: 767px) {
+    .carousel-caption {
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .carousel-caption h5 {
+      font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+  
+    .carousel-caption p {
+      font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+  
+    .carousel-caption button {
+      display: block; /* Ensure the button is displayed as a block element */
+      margin-top: 10px; /* Add some top margin for spacing */
+    }
+  }
+  
+
+
+  /* serch bar style */
+  #searchForm{
+    background-color: rgb(248, 240, 240);
+    margin: 5px;
+  }
+  #searchInput{
+    width: 250px;
+    border: none;
+    background-color: beige;
+  }
+  #searchBtn{
+    border: none;
+
+  }
+  /* footer */
+
+  /* .footer {
+    background-color: rgb(225, 233, 227);
+    padding: 30px 0;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-column {
+    flex: 1;
+    margin-right: 30px;
+  }
+  
+  .footer-column:last-child {
+    margin-right: 0;
+  }
+  
+  .footer-column h4 {
+    margin-bottom: 10px;
+    color: #1a2059;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 5px;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .social-icons li {
+    list-style: none;
+    padding: 20px;
+  } */
+  /* Base styles for footer */
+.footer {
+  background-color: rgb(225, 233, 227);
+  padding: 30px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-column {
+  flex: 1;
+  margin-right: 30px;
+}
+
+.footer-column:last-child {
+  margin-right: 0;
+}
+
+.footer-column h4 {
+  margin-bottom: 10px;
+  color: #1a2059;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icons li {
+  list-style: none;
+  padding: 20px;
+}
+.aboutus{
+text-decoration: none;
+color: blue;
+}
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-wrap: wrap;
+  }
+
+  .footer-column {
+    flex: 1 1 100%;
+    margin-right: 0;
+    margin-left: 100px;
+    margin-bottom: 20px;
+  }
+
+  .social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    gap: 10px;
+  }
+
+  .social-icons li {
+    padding: 10px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- home page navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">MENS FASHION</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            
+            <li>
+              <a class="nav-link" href="/admin/adminHome" style="color: rgb(92, 65, 161) !important;">ADMIN HOME</a>
+
+
+            </li>
+           
+
+            <li>
+              <a class="nav-link" href="/admin/Signin">Signin</a>
+
+            </li>
+            <li>
+              <a class="nav-link" href="/admin//adminsignout">Signout</a>
+
+            </li>
+            <li>
+              <a class="nav-link" href="/admin/get_category">category</a>
+
+            </li>
+            <li>
+              <a class="nav-link" href="/admin/products">products</a>
+
+            </li>
+            <li>
+              <a class="nav-link" href="/admin/get_user">userManagement</a>
+
+            </li>
+            <li>
+              <a class="nav-link" href="/admin/get_orderDetails">orderManagement</a>
+
+            </li>
+            
+            
+            
+          </ul>
+     
+          <!-- cart icon -->
+          
+          <!--  -->
+        </div>
+      </div>
+    </nav>

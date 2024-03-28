@@ -17,16 +17,30 @@ app.use(express.json());
 app.use(cookieparser())
 app.use(cors());
 // session middleweare
-app.use(session({
+// app.use(session({
+//     resave: false,
+//     saveUninitialized: true,
+//     /// secret: process.env.SESSION_SECRET,
+//     secret: 'your_secret_key_here',
+//     cookie: { maxAge: 3600000 }
+// }))
+// Session middleware for users
+const userSessionMiddleware = session({
     resave: false,
     saveUninitialized: true,
-    /// secret: process.env.SESSION_SECRET,
-    secret: 'your_secret_key_here',
-    cookie: { maxAge: 3600000 }
-}))
+    secret: 'user_secret_key_here',
+    cookie: { maxAge: 3600000 } // Set session expiration time as needed
+});
+// Session middleware for admins
+const adminSessionMiddleware = session({
+    resave: false,
+    saveUninitialized: true,
+    secret: 'admin_secret_key_here',
+    cookie: { maxAge: 3600000 } 
+});
 
-app.use('/',userRout)
-app.use('/',adminRout)
+app.use('/',userSessionMiddleware,userRout)
+app.use('/admin',adminSessionMiddleware,adminRout)
 // for adding externel file to view engine(static files)
 const staticPath = path.join(__dirname,'public')
 // const staticCategory = path.join(__dirname,'public/admin/category')

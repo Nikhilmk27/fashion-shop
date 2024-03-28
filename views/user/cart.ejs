@@ -9,6 +9,7 @@
                     <th scope="col">Product</th>
                     <th scope="col">image</th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">size</th>
                     <th scope="col">Price</th>
                     <th scope="col">Remove</th>
                 </tr>
@@ -32,9 +33,10 @@
                             
                             <button class="btn btn-sm btn-primary" onclick="updateQuantity('<%= item.productId._id.toString() %>','inc')">+</button>
                         </td>
+                        <td><%= item.size %></td>
                         
                         
-                        <td>$<%=  item.quantity * item.productId.price; %></td>
+                        <td>Rs: <%=  item.quantity * item.productId.price; %></td>
                         <td>
                             <button class="btn btn-sm btn-danger" onclick="removeProduct('<%= item.productId._id.toString() %>')">Remove</button>
                         </td>
@@ -47,7 +49,8 @@
                 <td>Total Price: </td>
                 <td></td>
                 <td></td>
-              <td class="text-start">$<%= totalPrice %></td>
+                <td></td>
+              <td class="text-start">Rs: <%= totalPrice %></td>
               <td></td>
 
             </tbody>

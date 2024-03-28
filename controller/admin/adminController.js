@@ -1,46 +1,89 @@
+// const {orders}   = require("razorpay/dist/types/orders.js");
 const admin = require("../../model/admin.js");
 const Category = require("../../model/categoryModel.js");
 const Product = require("../../model/productModel.js");
+const usecollections = require("../../model/userCollection");
+const order = require("../../model/order");
 const fs = require("fs");
 const path = require("path");
 
+
+
+
 // admin signin controlers
+// const getAdminSignin = (req, res) => {
+//   if(req.session.admin){
+//     res.render("../views/admin/adminHome.ejs");
+//   }else{
+//     res.render("../views/admin/adminSignin.ejs");
+//   }
+  
+//   email nikhilchandranmk@gmail.com
+//   password Nikhil@9526
+// };
 const getAdminSignin = (req, res) => {
-  res.render("../views/adminSignin.ejs");
-};
+  res.render("../views/admin/adminHome.ejs");
+  }
+  
+  // email nikhilchandranmk@gmail.com
+  // password Nikhil@9526
+
 const postAdminSignin = async (req, res) => {
   try {
     const { email, password } = req.body;
+    req.session.admin = req.body
     console.log(req.body);
     console.log(email);
     const adminExist = await admin.findOne({ email: email });
     console.log(adminExist);
     if (adminExist && password == adminExist.password) {
-      res.render("../views/adminHome.ejs");
-    } else {
-      res.render("../views/adminSignin");
+      res.render("../views/admin/adminHome.ejs");
+    } 
+    else {
+      res.redirect("/admin/admin_signin");
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err.message)
   }
 };
+// const getAdminHome = (req, res) => {
+//   res.render("../views/admin/adminHome");
+//   try {
+//     console.log(req.session.admin)
+//     if(req.session.admin){
+//       res.render("../views/admin/adminHome");
+//     }else{
+//       res.render("../views/admin/adminSignin")
+//     }
+    
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 const getAdminHome = (req, res) => {
-  try {
-    res.render("../views/adminHome.ejs");
-  } catch (error) {
-    console.log(error.message);
-  }
+  res.render("../views/admin/adminHome");
+  
 };
 // admin category management
 
 const getCategory = async (req, res) => {
-  const categories = await Category.find();
-  console.log(categories);
-  res.render("../views/category.ejs", { categories: categories });
+  try {
+    const categories = await Category.find();
+    if(req.session.admin){
+      res.render("../views/admin/category.ejs", { categories: categories });
+    }else{
+      res.redirect("/admin_signin")
+    }
+    
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+
 };
 const getAddcategory = (req, res) => {
   try {
-    res.render("../views/add.ejs");
+    res.render("../views/admin/addCategory.ejs");
   } catch (error) {
     console.log(error);
   }
@@ -133,7 +176,8 @@ const deleteCategory = async (req, res) => {
 
 // admin product management
 const productHome = async (req, res) => {
-  const products = await Product.find();
+  // const products = await Product.find();
+  const products = await Product.find().populate('category')
   console.log(products);
   res.render("../views/admin/productHome", { products: products });
 };
@@ -291,6 +335,65 @@ try {
 }
 
 }
+// sign out rout
+const signout = (req,res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).send('Error destroying session');
+    } else {
+      // Redirect the user to the home page or any other appropriate page after sign-out
+      res.redirect('/admin/signin');
+    }
+})
+}
+
+//  admin user management
+// rout to get all users
+const getUser = async (req, res) => {
+  try {
+    const users = await usecollections.find();
+    res.render("../views/admin/userManage.ejs", { users: users });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: 'Internal server error' }); 
+  }
+};
+// user delete rout
+const deleteUser = async(req,res) => {
+  try {
+    const id = req.params.id
+  await usecollections.deleteOne({ _id: id }).then((deletedProduct) => {
+    console.log(`category deleted`, deletedProduct)})
+    res.redirect('/admin/get_user')
+  }
+   catch (error) {
+    console.log(error)
+  }
+}
+
+// admin order management
+
+// get orders managment page
+const getOrderDetails = async(req,res) =>{
+  try {
+    const orders = await order.find().populate('user')
+    if(orders){
+      res.render('../views/admin/ordermanagement.ejs',{orders})
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+
+
+}
+
+// change order status
+const changeOrderStatus = async (req,res) => {
+
+}
+
+
 
 module.exports = {
   getAdminHome,
@@ -307,5 +410,10 @@ module.exports = {
   postAddProduct,
   getEditproduct,
   postEditproduct,
-  deleteProduct
+  deleteProduct,
+  signout,
+  getUser,
+  deleteUser,
+   getOrderDetails,
+   changeOrderStatus,
 };

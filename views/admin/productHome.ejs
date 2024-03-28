@@ -1,4 +1,4 @@
-<%- include('../partials/adminHeader') %>
+<%- include('../partials/adminNav') %>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -13,7 +13,7 @@
   });
 </script>
 
-<h1>listing the product the product home page</h1>
+<h1 class="mt-2" style="text-align: center; color: rgb(47, 47, 126);">Product Management</h1>
 
    
    
@@ -34,16 +34,19 @@
 <body>
 
 <!-- Button as a link -->
-<a href="/add_product" class="button-link">add product</a>
+<!-- Button as a link -->
+<div  style="display: flex; justify-content: flex-end; margin-top: 20px; margin-right: 10px;">
+  <a href="/admin/add_product" class="button-link">add product</a>
+</div
 
 
 
     
    
-    
-<!-- table to  display the categor data -->
+    <!-- table -->
+
 <div class="container mt-5">
-  <h2>product list</h2>
+  <h2 style="margin-bottom: 10px; color: rgb(47, 47, 126);">product list</h2>
   
   <% if ( products!= "") { %>
     <table class="table table-striped" id="productTable">
@@ -64,7 +67,7 @@
            
             <td><img src="/admin/products/<%= product.image %>" alt="User Image" width="50" class="img-thumbnail"></td>
             <td><%= product.name %></td>
-            <td><%= product.category %></td>
+            <td><%= product.category.name %></td>
             
             <td>
               <a href="/delete_product/<%= product._id %>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</a>
@@ -79,6 +82,58 @@
     <h1 class="text-center text-secondary mt-5">no data found in the db!</h1>
   <%} %>
 </div>
+
+<!-- cssss -->
+<!-- Bootstrap CSS link (ensure this is included in your HTML head) -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<style>
+  /* Adjust table layout for smaller devices */
+  @media (max-width: 767px) {
+    /* Hide table headers on small screens */
+    #productTable thead {
+      display: none;
+    }
+
+    /* Center the table content */
+    #productTable tbody tr td {
+      text-align: center;
+    }
+
+    /* Ensure table rows are displayed as blocks */
+    #productTable tbody tr {
+      display: block;
+      margin-bottom: 20px; /* Adjust spacing between rows */
+    }
+
+    /* Ensure table data cells are displayed as blocks */
+    #productTable tbody tr td {
+      display: block;
+    }
+
+    /* Add margin to individual table data elements */
+    #productTable tbody tr td {
+      margin-bottom: 10px; /* Adjust spacing between data elements */
+    }
+
+    /* Style table data elements */
+    #productTable tbody tr td img {
+      width: 100%;
+      max-width: 100px; /* Limit image width */
+      height: auto;
+    }
+
+    /* Center-align text in table data elements */
+    #productTable tbody tr td {
+      text-align: center;
+    }
+
+    /* Style buttons in table data */
+    #productTable tbody tr td .btn {
+      margin: 5px;
+    }
+  }
+</style>
 
 
 <%- include('../partials/adminFooter') %>

@@ -1,10 +1,10 @@
-const User = require("../../model/user");
+ const User = require("../../model/user");
 const usercollection = require("../../model/userCollection");
 const products = require("../../model/productModel");
 const Category = require("../../model/categoryModel");
 const Cart = require("../../model/cart");
 const order = require("../../model/order");
-// const userSign = require("../../model/userCollection");
+ const userSign = require("../../model/userCollection");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const isLoggedIn = require('./isLoggedIn')
@@ -318,7 +318,9 @@ const getProductView = async (req, res) => {
     const product = await products.findOne({ _id: id });
     console.log("single product");
     console.log(product);
-    res.render("../views/user/productPage.ejs", { product });
+    const name = req.session.user ? req.session.user.name : "";
+    console.log(name)
+    res.render("../views/user/productx.ejs", { name,product });
   } catch (error) {
     console.log(error.message);
   }
@@ -395,6 +397,8 @@ const getAddToCart = async (req, res) => {
     if (!cart) {
       return res.render("../views/user/cart", { cartItems: [] });
     }
+    const size = cart.size
+    console.log(size)
 
     res.render("../views/user/cart", { cartItems: cart.items,name });
   } catch (error) {
@@ -413,6 +417,8 @@ const postAddToCat = async (req, res) => {
 
   const userId = req.session.user._id; // Assuming user ID is stored in session
   const productId = req.params.productId;
+  const size = req.body.size
+  console.log(size)
 
   try {
     let cart = await Cart.findOne({ userId });
@@ -431,7 +437,7 @@ const postAddToCat = async (req, res) => {
       existingItem.quantity++;
     } else {
       // If the product doesn't exist, add it to the cart
-      cart.items.push({ productId, quantity: 1 });
+      cart.items.push({ productId, quantity: 1,size });
     }
 
     await cart.save();
@@ -563,6 +569,7 @@ const getCheckOut = async (req, res) => {
   }
 
   const userId = req.session.user._id;
+  const name = req.session.user.name
 
   try {
     const cart = await Cart.findOne({ userId }).populate("items.productId");
@@ -571,7 +578,7 @@ const getCheckOut = async (req, res) => {
       return res.render("../views/user/checkout", { cartItems: [] });
     }
 
-    res.render("../views/user/checkout", { cartItems: cart.items });
+    res.render("../views/user/checkout", { cartItems: cart.items ,name});
   } catch (error) {
     console.error("Error fetching cart details:", error);
     res.sendStatus(500); // Internal server error

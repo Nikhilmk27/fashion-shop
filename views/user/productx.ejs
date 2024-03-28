@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Product Card/Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <style>
@@ -20,8 +31,9 @@ body{
     line-height: 1.5;
 }
 .card-wrapper{
-    max-width: 1100px;
-    margin: 0 auto;
+    /* max-width: 1100px; */
+    max-width: 800px;
+    margin: 10px auto;
 }
 img{
     width: 100%;
@@ -188,7 +200,11 @@ img{
     border-color: transparent;
     color: #fff;
 }
-
+#cart {
+  background-color: blue;
+  color: white; 
+  
+}
 @media screen and (min-width: 992px){
     .card{
         display: grid;
@@ -213,6 +229,302 @@ img{
     </style>
   </head>
   <body>
+<!-- nav bar -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100,200,300,400,500,600,700,800,900&display=swap');
+
+
+.navbar {
+    background-color: white;
+    font-family: "Lexend Mega", sans-serif;
+    position: sticky;
+  top: 0;
+  z-index: 1000; /* Adjust the z-index value as needed */
+}
+@media (max-width: 767px) {
+    .navbar {
+        position: relative;
+        width: 100%;
+    }
+}
+.nav-link {
+    color: rgb(57, 57, 240) !important; /* Default link color */
+  }
+  
+  
+  
+  .nav-link:hover {
+    color: green !important; /* Color for hovered link */
+  }
+  .navbar-brand{
+    color: rgb(13, 8, 166);
+    font-weight: 700;
+  }
+  /* Default styles for carousel captions */
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .carousel-caption h5 {
+    font-size: 2rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 1.5rem;
+  }
+  
+  /* Brand logo style */
+  .brandlogo {
+    color: rgb(13, 8, 166);
+    font-weight: 700;
+  }
+  
+  /* Media query for smaller screens (up to 767px) */
+  @media (max-width: 767px) {
+    .carousel-caption {
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .carousel-caption h5 {
+      font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+  
+    .carousel-caption p {
+      font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+  
+    .carousel-caption button {
+      display: block; /* Ensure the button is displayed as a block element */
+      margin-top: 10px; /* Add some top margin for spacing */
+    }
+  }
+  
+
+
+  /* serch bar style */
+  #searchForm{
+    background-color: rgb(248, 240, 240);
+    margin: 5px;
+  }
+  #searchInput{
+    width: 250px;
+    border: none;
+    background-color: beige;
+  }
+  #searchBtn{
+    border: none;
+
+  }
+  /* footer */
+
+  /* .footer {
+    background-color: rgb(225, 233, 227);
+    padding: 30px 0;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-column {
+    flex: 1;
+    margin-right: 30px;
+  }
+  
+  .footer-column:last-child {
+    margin-right: 0;
+  }
+  
+  .footer-column h4 {
+    margin-bottom: 10px;
+    color: #1a2059;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 5px;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .social-icons li {
+    list-style: none;
+    padding: 20px;
+  } */
+  /* Base styles for footer */
+.footer {
+  background-color: rgb(225, 233, 227);
+  padding: 30px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-column {
+  flex: 1;
+  margin-right: 30px;
+}
+
+.footer-column:last-child {
+  margin-right: 0;
+}
+
+.footer-column h4 {
+  margin-bottom: 10px;
+  color: #1a2059;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icons li {
+  list-style: none;
+  padding: 20px;
+}
+.aboutus{
+text-decoration: none;
+color: blue;
+}
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-wrap: wrap;
+  }
+
+  .footer-column {
+    flex: 1 1 100%;
+    margin-right: 0;
+    margin-left: 100px;
+    margin-bottom: 20px;
+  }
+
+  .social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    gap: 10px;
+  }
+
+  .social-icons li {
+    padding: 10px;
+  }
+}
+
+</style>
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid">
+    <a class="navbar-brand " href="/home">MENS FASHION</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+        
+        <% if (!name) { %> <!-- Check if user is not authenticated -->
+          <li class="nav-item">
+            <a class="nav-link" href="/signin">Sign In</a>
+          </li>
+        <% } %>
+        <% if (name) { %> <!-- Check if user is not authenticated -->
+          <li class="nav-item">
+            <a class="nav-link" href="/signout">Sign Out</a>
+          </li>
+        <% } %>
+
+        <!-- <li>
+          <a class="nav-link" href="/signin">Signin</a>
+
+        </li> -->
+        
+
+      </ul>
+      <!-- search bar form -->
+      
+      
+       
+      
+      <!-- cart icon -->
+
+      <ul class="navbar-nav ml-auto">
+        <!-- Cart icon -->
+<li class="nav-item">
+<a class="nav-link" href="/addToCart">
+  <i class="fas fa-shopping-cart"></i>
+  <!-- Cart icon -->
+  <span id="cartItemCount" class="badge bg-secondary"></span> <!-- Display cart count here -->
+</a>
+</li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-heart"></i>
+            <!-- Wishlist icon -->
+          </a>
+        </li>
+        <li>
+          <!-- Your home page content -->
+<% if (name) { %>
+<p style="color: rgb(233, 85, 11); margin-top:3px; font-size: 20px; font-weight: bold;"> <%= name %></p>
+<% } else { %>
+<p></p>
+<% } %>
+
+        </li>
+        
+      </ul>
+      <!--  -->
+    </div>
+  </div>
+</nav>
+
     
     <div class = "card-wrapper">
       <div class = "card">
@@ -220,39 +532,38 @@ img{
         <div class = "product-imgs">
           <div class = "img-display">
             <div class = "img-showcase">
-              <img src = "/tshirt.jpg" alt = "shoe image">
-              <img src = "/tshirt.jpg" alt = "shoe image">
-              <img src = "/tshirt.jpg" alt = "shoe image">
-              <img src = "/tshirt.jpg" alt = "shoe image">
+              <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
+              <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
+              <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
+              <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
             </div>
           </div>
           <div class = "img-select">
             <div class = "img-item">
               <a href = "#" data-id = "1">
-                <img src = "/tshirt.jpg" alt = "shoe image">
+                <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
               </a>
             </div>
             <div class = "img-item">
               <a href = "#" data-id = "2">
-                <img src = "/tshirt.jpg" alt = "shoe image">
+                <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
               </a>
             </div>
             <div class = "img-item">
               <a href = "#" data-id = "3">
-                <img src = "/tshirt.jpg" alt = "shoe image">
+                <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
               </a>
             </div>
             <div class = "img-item">
               <a href = "#" data-id = "4">
-                <img src = "/tshirt.jpg" alt = "shoe image">
+                <img src = "/admin/products/<%= product.image %>" alt = "shoe image">
               </a>
             </div>
           </div>
         </div>
         <!-- card right -->
         <div class = "product-content">
-          <h2 class = "product-title">nike shoes</h2>
-          <a href = "#" class = "product-link">visit nike store</a>
+          <h2 class = "product-title">MensFashion</h2>
           <div class = "product-rating">
             <i class = "fas fa-star"></i>
             <i class = "fas fa-star"></i>
@@ -263,53 +574,69 @@ img{
           </div>
 
           <div class = "product-price">
-            <p class = "last-price">Old Price: <span>$257.00</span></p>
-            <p class = "new-price">New Price: <span>$249.00 (5%)</span></p>
+            <!-- <p class = "last-price">Price: <span><%= product.price %></span></p> -->
+            <p class = "new-price">Price: <span><%= product.price %> RUPEES</span></p>
           </div>
 
           <div class = "product-detail">
-            <h2>about this item: </h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+            <h2><%= product.name %> </h2>
+            <p><%= product.description %></p>
+            <p><%= product.richDescription %></p>
+            <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p> -->
+            <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p> -->
             <ul>
-              <li>Color: <span>Black</span></li>
-              <li>Available: <span>in stock</span></li>
-              <li>Category: <span>Shoes</span></li>
-              <li>Shipping Area: <span>All over the world</span></li>
-              <li>Shipping Fee: <span>Free</span></li>
+              <li>Color: <span><%=  %></span></li>
+              <li>Available: <span><%= product.countInStock%> pice in stock</span></li>
+              <!-- <li>Category: <span>Shoes</span></li> -->
+              <li>Shipping Area: <span>all over india</span></li>
+              <li>Shipping Fee: <span>free</span></li>
             </ul>
           </div>
 
           <div class = "purchase-info">
-            <input type = "number" min = "0" value = "1">
-            <button type = "button" class = "btn">
+            <!-- <input type = "number" min = "0" value = "1"> -->
+            <div class="purchase-info">
+              <!-- Add the size selection dropdown inside the form -->
+              <form action="/addToCart/<%= product._id %>" method="post">
+                <div class="form-group" style="margin-bottom: 20px;">
+                  <label for="size">Select Size:</label>
+                  <select id="size" name="size" class="form-control">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="xl">XL</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn" id="cart">
+                  Add to Cart <i class="fas fa-shopping-cart"></i>
+                </button>
+              </form>
+            </div>
+            
+            <!-- <form action="/addToCart/<%= product._id %>" method="post">
+            <button type = "submit" class = "btn" id="cart">
               Add to Cart <i class = "fas fa-shopping-cart"></i>
             </button>
-            <button type = "button" class = "btn">Compare</button>
+            </form> -->
+            <!-- <button type = "button" class = "btn">Compare</button> -->
           </div>
 
           <div class = "social-links">
-            <p>Share At: </p>
+            <p>follow Us At: </p>
             <a href = "#">
-              <i class = "fab fa-facebook-f"></i>
+              <i class = "fab fa-facebook-f" style="color: blue; font-size: 24px;"></i>
             </a>
             <a href = "#">
-              <i class = "fab fa-twitter"></i>
+              <i class = "fab fa-instagram" style="color: rgb(255, 0, 255);font-size: 24px;"></i>
             </a>
             <a href = "#">
-              <i class = "fab fa-instagram"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-whatsapp"></i>
-            </a>
-            <a href = "#">
-              <i class = "fab fa-pinterest"></i>
+              <i class = "fab fa-whatsapp" style="color: green; font-size: 24px;"></i>
             </a>
           </div>
         </div>
       </div>
     </div>
-
+<!-- btns -->
     
     <script>
         const imgs = document.querySelectorAll('.img-select a');
@@ -332,5 +659,15 @@ function slideImage(){
 
 window.addEventListener('resize', slideImage);
     </script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/user/indexjq.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+
   </body>
 </html>

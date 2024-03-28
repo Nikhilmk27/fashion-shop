@@ -1,0 +1,98 @@
+<!-- Include necessary CSS files -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<!-- Include your custom CSS styles -->
+<style>
+    /* Default table styles */
+    .table-responsive {
+      overflow-x: auto;
+    }
+  
+    /* Table row styles */
+    .table-responsive table tbody tr td {
+      text-align: left;
+    }
+  
+    /* Media query for smaller devices */
+    @media (max-width: 767px) {
+      /* Hide table headers on small screens */
+      .table-responsive table thead {
+        display: none;
+      }
+  
+      /* Center-align table data */
+      .table-responsive table tbody tr td {
+        text-align: center;
+      }
+  
+      /* Adjust table row display */
+      .table-responsive table tbody tr {
+        display: block;
+        border-bottom: 1px solid #dee2e6; /* Add border between rows */
+        margin-bottom: 10px; /* Adjust spacing between rows */
+      }
+  
+      /* Style table data elements */
+      .table-responsive table tbody tr td {
+        display: block;
+        margin-bottom: 5px; /* Adjust spacing between data elements */
+      }
+  
+      /* Style buttons in table data */
+      .table-responsive table tbody tr td .btn {
+        display: block;
+        margin: 5px auto; /* Center-align buttons and add spacing */
+      }
+    }
+  </style>
+  
+  
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include DataTables JavaScript -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<%- include('../partials/adminNav.ejs') %>
+
+<h1 class="mt-2" style="text-align: center; color: rgb(47, 47, 126);">User Management</h1>
+
+<div class="container mt-5">
+  <h2 style="margin-bottom: 10px; color: rgb(47, 47, 126);">User list</h2>
+  
+  <% if (users && users.length > 0) { %>
+    <table class="table table-striped" id="productTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((user) => { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <a href="/delete_user/<%= user._id %>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</a>
+              <!-- <a href="/edit_user/<%= user._id %>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a> -->
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h1 class="text-center text-secondary mt-5">No data found in the database!</h1>
+  <% } %>
+</div>
+
+<!-- Include your custom JavaScript for DataTables initialization -->
+<script>
+  $(document).ready(function() {
+    $('#productTable').DataTable();
+  });
+</script>
+
+<%- include('../partials/adminFooter') %>
